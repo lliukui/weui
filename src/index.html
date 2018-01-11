@@ -1,15 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>MebApp</title>
-  <base href="/">
+    <meta charset="utf-8">
+    <title>MebApp</title>
+    <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
 </head>
+<style>
+.backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 33333;
+    background-color: #173267;
+    filter: alpha(opacity=2);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+}
+.container {
+    position: fixed;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 33335;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+</style>
 <body>
-  <app-root></app-root>
+    <app-root>
+        <div class="backdrop"></div>
+        <div class="container">
+            嘉宝康乐
+        </div>
+    </app-root>
 </body>
 </html>
