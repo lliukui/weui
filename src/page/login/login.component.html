@@ -1,10 +1,10 @@
-<div class="weui-cells weui-cells_form">
+<div class="weui-cells weui-cells_form mt0">
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">用户名</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" name="username" [(ngModel)]="formData.username" placeholder="请输入用户名" weui-input="username" weui-required>
+            <input class="weui-input" type="text" name="username" [(ngModel)]="formData.username" placeholder="请输入用户名">
         </div>
     </div>
     <div class="weui-cell">
@@ -12,8 +12,10 @@
             <label class="weui-label">密码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="password" name="password" [(ngModel)]="formData.password" placeholder="请输入密码" weui-input="password" weui-required>
+            <input class="weui-input" type="password" name="password" [(ngModel)]="formData.password" placeholder="请输入密码">
         </div>
     </div>
 </div>
-<button (click)="login()" weui-button>登录</button>
+<div class="mag">
+    <button (click)="login()" weui-button [weui-loading]="loading" [disabled]="formData.username == '' || formData.password == '' || loading">登录</button>
+</div>
