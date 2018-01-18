@@ -603,4 +603,8 @@ export class BookingComponent{
         }, 10);
         return false;
     }
+
+    goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
 }

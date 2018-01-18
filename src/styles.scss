@@ -19,3 +19,19 @@ body, html{
     max-height: 200px;
     overflow: auto;
 }
+
+.container-main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.main-content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 53px;
+    right: 0;
+    overflow: auto;
+}

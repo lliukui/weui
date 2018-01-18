@@ -50,4 +50,8 @@ export class BookingList{
     goPay(booking) {
         this.router.navigate(['./booking/info'], {queryParams: {id: booking.bookingId}});
     }
+
+    goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
 }

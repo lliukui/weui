@@ -42,7 +42,7 @@
             </div>
         </div>
     </weui-sidebar>
-    <div>
+    <div class="main-content">
         <div class="weui-grids">
             <a href="javascript:;" class="weui-grid" (click)="goUrl('booking')">
                 <div class="weui-grid__icon">
@@ -60,4 +60,12 @@
         <weui-button (click)="toggleOpened()">打开</weui-button>
     </div>
 </weui-sidebar-container>
+<div class="weui-tabbar">
+    <div class="weui-tabbar__item weui-bar__item_on" (click)="goUrl('home')">
+        <div style="display: inline-block; position: relative;">
+            <div class="weui-tabbar__icon"><img src="./assets/images/icon_home.png"></div>
+        </div>
+        <p class="weui-tabbar__label">首页</p>
+    </div>
+</div>
 <!-- <ng4y-dialog></ng4y-dialog> -->

@@ -1,4 +1,4 @@
-<div>
+<div class="main-content">
     <weui-navbar>
         <weui-tab heading="已有宝宝" (select)="selectChildType('has')">
             <article>
@@ -95,6 +95,14 @@
     </div>
     <div class="mag15">
         <button (click)="bookingSub()" weui-button [weui-loading]="loading" [disabled]="(booking.childType == 'has' && booking.child.text == '') || (booking.childType == 'no' && (booking.user.name == '' || booking.user.mobile == '' || booking.child_info.name == '' || booking.child_info.gender == '' || booking.child_info.birth_date == '')) || booking.service.text == '' || booking.doctor.text == '' || booking.booking_fee == '' || booking.booking_date.text == '' || booking.time.text == '' || loading">预约</button>
+    </div>
+</div>
+<div class="weui-tabbar">
+    <div class="weui-tabbar__item weui-bar__item_on" (click)="goUrl('home')">
+        <div style="display: inline-block; position: relative;">
+            <div class="weui-tabbar__icon"><img src="./assets/images/icon_home.png"></div>
+        </div>
+        <p class="weui-tabbar__label">首页</p>
     </div>
 </div>
 <weui-dialog #auto [config]="config"></weui-dialog>
