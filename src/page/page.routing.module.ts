@@ -22,6 +22,16 @@ const pageRoutes: Routes = [
 	{
 		path: 'booking',
 		loadChildren: './booking/booking.module#BookingModule',
+	},
+	{
+		path: 'workbench',
+		loadChildren: './workbench/workbench.module#WorkbenchModule',
+		data: {preload: true},
+	},
+	{
+		path: 'transaction',
+		loadChildren: './transaction/transaction.module#TransactionModule',
+		data: {preload: true},
 	}
 ]
 
