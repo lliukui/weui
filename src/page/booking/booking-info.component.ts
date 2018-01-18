@@ -30,7 +30,6 @@ export class BookingInfo implements OnInit{
         statusText: string,
     }
     booking: {
-        mobile: string,
         authCode: string,
     }
     showTab: string;
@@ -81,14 +80,12 @@ export class BookingInfo implements OnInit{
             statusText: '',
         };
         this.booking = {
-            mobile: '',
             authCode: '',
         };
-        this.showTab = 'info';
+        this.showTab = '';
 
         (<ToastComponent>this.loadingToast).onShow();
         this.pageService.bookinginfo(this.bookingId).then((data) => {
-            console.log(1);
             if(data.status == 'no'){
                 (<ToastComponent>this.loadingToast).onHide();
                 this.toptips.warn(data.errorMsg);
@@ -98,17 +95,16 @@ export class BookingInfo implements OnInit{
                 (<ToastComponent>this.loadingToast).onHide();
             }
         }).catch(() => {
-            console.log(2);
             (<ToastComponent>this.loadingToast).onHide();
-            this.toptips.warn('服务器错误999');
+            this.toptips.warn('服务器错误');
         });
     }
 
     showBookingInfo() {
-        if((this.booking.mobile == this.bookingInfo.mobile) && this.booking.authCode == (this.bookingInfo.authCode)){
+        if(this.booking.authCode == this.bookingInfo.authCode){
             this.showTab = 'info';
         }else{
-            this.toptips.warn('手机号码或邀请码不正确');
+            this.toptips.warn('邀请码不正确');
         }
     }
 

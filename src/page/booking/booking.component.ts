@@ -57,30 +57,12 @@ export class BookingComponent{
         authCode: string,
     }
     loading: boolean = false;
-    private childConfig: DialogConfig = <DialogConfig>{
-        title: '选择宝宝',
-        inputError: '请选择宝宝',
-        inputRequired: true,
-        inputOptions: []
-    };
-    private genderConfig: DialogConfig = <DialogConfig>{
-        title: '选择性别',
-        inputError: '请选择性别',
-        inputRequired: true,
-        inputOptions: [
-            {text: '男', value: 'M'},
-            {text: '女', value: 'F'},
-        ]
-    };
+    childList: any[];
+    genderList: any[];
+    serviceList: any[];
     private refereeConfig: DialogConfig = <DialogConfig>{
         title: '选择推荐人',
         inputError: '请选择推荐人',
-        inputRequired: true,
-        inputOptions: []
-    };
-    private serviceConfig: DialogConfig = <DialogConfig>{
-        title: '选择科室',
-        inputError: '请选择科室',
         inputRequired: true,
         inputOptions: []
     };
@@ -155,6 +137,14 @@ export class BookingComponent{
             remark: '',
             authCode: '',
         }
+        this.childList = [];
+        this.genderList = [
+            [
+                {label: '男', value: 'M'},
+                {label: '女', value: 'F'},
+            ]
+        ];
+        this.serviceList = [];
 
         this.url = '?username=' + localStorage.getItem('username')
              + '&token=' + localStorage.getItem('token')
@@ -166,16 +156,18 @@ export class BookingComponent{
                 this.toptips.warn(data.errorMsg);
             }else{
                 var results = JSON.parse(JSON.stringify(data.results));
+                var child_list = [];
                 for(var item of results.child){
                     var child = {
-                        text: item.childName,
+                        label: item.childName,
                         value: JSON.stringify({
                             id: item.childId,
                             name: item.childName,
                         })
                     }
-                    this.childConfig.inputOptions.push(child);
+                    child_list.push(child);
                 }
+                this.childList.push(child_list);
             }
         }).catch(() => {
             this.toptips.warn('服务器错误');
@@ -209,17 +201,18 @@ export class BookingComponent{
                 this.toptips.warn(data.errorMsg);
             }else{
                 var results = JSON.parse(JSON.stringify(data.results));
-                this.serviceConfig.inputOptions = [];
+                var service_list = [];
                 for(var item of results.servicelist){
                     var service = {
-                        text: item.serviceName,
+                        label: item.serviceName,
                         value: JSON.stringify({
                             id: item.serviceId,
                             name: item.serviceName,
                         })
                     }
-                    this.serviceConfig.inputOptions.push(service);
+                    service_list.push(service);
                 }
+                this.serviceList.push(service_list);
             }
         }).catch(() => {
             this.toptips.warn('服务器错误');
@@ -230,50 +223,9 @@ export class BookingComponent{
         this.booking.childType = type;
     }
 
-    selectGender() {
-        const cog = Object.assign({}, this.genderConfig, <DialogConfig>{
-            skin: 'auto',
-            type: 'prompt',
-            confirm: '确认',
-            cancel: '取消',
-            input: 'radio',
-            inputValue: undefined,
-            inputRegex: null
-        });
-        if(this.booking.child_info.gender.text != ''){
-            cog.inputValue = this.booking.child_info.gender;
-        }
-        this.config = cog;
-        this.autoAS.show().subscribe((res: any) => {
-            if (res.result){
-                this.booking.child_info.gender = res.result;
-            }
-        });
-        return false;
-    }
-
-    selectChild() {
-        const cog = Object.assign({}, this.childConfig, <DialogConfig>{
-            skin: 'auto',
-            type: 'prompt',
-            confirm: '确认',
-            cancel: '取消',
-            input: 'radio',
-            inputValue: undefined,
-            inputRegex: null
-        });
-        if(this.booking.child.text != ''){
-            cog.inputValue = this.booking.child;
-        }
-        this.config = cog;
-        this.autoAS.show().subscribe((res: any) => {
-            if (res.result){
-                this.booking.child = res.result;
-                // 获取家长信息
-                this.getUser();
-            }
-        });
-        return false;
+    selectChild(_value) {
+        // 获取家长信息
+        this.getUser();
     }
 
     selectBirthDate() {
@@ -325,37 +277,18 @@ export class BookingComponent{
     }
 
     selectService() {
-        const cog = Object.assign({}, this.serviceConfig, <DialogConfig>{
-            skin: 'auto',
-            type: 'prompt',
-            confirm: '确认',
-            cancel: '取消',
-            input: 'radio',
-            inputValue: undefined,
-            inputRegex: null
-        });
-        if(this.booking.service.text != ''){
-            cog.inputValue = this.booking.service;
-        }
-        this.config = cog;
-        this.autoAS.show().subscribe((res: any) => {
-            if (res.result){
-                this.booking.service = res.result;
-                this.getDoctorList();
-                // 清空信息
-                this.booking.doctor = {
-                    text: '', value: ''
-                };
-                this.booking.booking_fee = '';
-                this.booking.booking_date = {
-                    text: '', value: ''
-                };
-                this.booking.time = {
-                    text: '', value: ''
-                };
-            }
-        });
-        return false;
+        this.getDoctorList();
+        // 清空信息
+        this.booking.doctor = {
+            text: '', value: ''
+        };
+        this.booking.booking_fee = '';
+        this.booking.booking_date = {
+            text: '', value: ''
+        };
+        this.booking.time = {
+            text: '', value: ''
+        };
     }
 
     getDoctorList() {

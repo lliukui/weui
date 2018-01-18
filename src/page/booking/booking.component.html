@@ -5,8 +5,12 @@
                 <div class="weui-cells weui-cells_form mt0">
                     <div class="weui-cell">
                         <div class="weui-cell_hd"><label class="weui-label">宝宝<span class="required">*</span></label></div>
-                        <div class="weui-cell__bd" (click)="selectChild()">
-                            <input class="weui-input" type="text" name="child" [(ngModel)]="booking.child.text" placeholder="请选择宝宝" disabled>
+                        <div class="weui-cell__bd">
+                            <input *ngIf="childList.length == 0" class="weui-input" type="text" placeholder="请选择宝宝">
+                            <weui-picker *ngIf="childList.length > 0" placeholder="请选择宝宝" [(ngModel)]="booking.child.value" name="child"
+                                [groups]="childList"
+                                [options]="{cancel:'取消', confirm:'确认', backdrop: false}"
+                                (change)="selectChild($event.value)"></weui-picker>
                         </div>
                     </div>
                 </div>
@@ -35,8 +39,11 @@
                     </div>
                     <div class="weui-cell">
                         <div class="weui-cell_hd"><label class="weui-label">性别<span class="required">*</span></label></div>
-                        <div class="weui-cell__bd" (click)="selectGender()">
-                            <input class="weui-input" type="text" name="gender" [(ngModel)]="booking.child_info.gender.text" placeholder="请选择性别" disabled>
+                        <div class="weui-cell__bd">
+                            <input *ngIf="genderList.length == 0" class="weui-input" type="text" placeholder="请选择性别">
+                            <weui-picker *ngIf="genderList.length > 0" placeholder="请选择性别" [(ngModel)]="booking.child_info.gender.value" name="gender"
+                                [groups]="genderList"
+                                [options]="{cancel:'取消', confirm:'确认', backdrop: false}"></weui-picker>
                         </div>
                     </div>
                     <div class="weui-cell">
@@ -52,8 +59,12 @@
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">科室<span class="required">*</span></label></div>
-            <div class="weui-cell__bd" (click)="selectService()">
-                <input class="weui-input" type="text" name="service" [(ngModel)]="booking.service.text" placeholder="请选择科室" disabled>
+            <div class="weui-cell__bd">
+                <input *ngIf="serviceList.length == 0" class="weui-input" type="text" placeholder="请选择科室">
+                <weui-picker *ngIf="serviceList.length > 0" placeholder="请选择科室" [(ngModel)]="booking.service.value" name="service"
+                    [groups]="serviceList"
+                    [options]="{cancel:'取消', confirm:'确认', backdrop: false}"
+                    (change)="selectService($event.value)"></weui-picker>
             </div>
         </div>
         <div class="weui-cell">
@@ -94,7 +105,7 @@
         </div>
     </div>
     <div class="mag15">
-        <button (click)="bookingSub()" weui-button [weui-loading]="loading" [disabled]="(booking.childType == 'has' && booking.child.text == '') || (booking.childType == 'no' && (booking.user.name == '' || booking.user.mobile == '' || booking.child_info.name == '' || booking.child_info.gender.text == '' || booking.child_info.birth_date == '')) || booking.service.text == '' || booking.doctor.text == '' || booking.booking_fee == '' || booking.booking_date.text == '' || booking.time.text == '' || loading">预约</button>
+        <button (click)="bookingSub()" weui-button [weui-loading]="loading" [disabled]="(booking.childType == 'has' && booking.child.value == '') || (booking.childType == 'no' && (booking.user.name == '' || booking.user.mobile == '' || booking.child_info.name == '' || booking.child_info.gender.value == '' || booking.child_info.birth_date == '')) || booking.service.value == '' || booking.doctor.text == '' || booking.booking_fee == '' || booking.booking_date.text == '' || booking.time.text == '' || loading">预约</button>
     </div>
 </div>
 <div class="weui-tabbar">
