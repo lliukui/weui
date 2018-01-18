@@ -1,0 +1,30 @@
+<div>
+    <div class="qrcode-tab text-center">
+        <qr-code [value]="payUrl" [size]="200"></qr-code>
+    </div>
+    <article class="weui-article">
+        <section *ngIf="type == 'wechat'">
+            <h2 class="title">微信支付</h2>
+            <section>
+                <p>
+                    长按二维码进行支付。
+                </p>
+            </section>
+        </section>
+        <section *ngIf="type == 'ali'">
+            <h2 class="title">支付宝支付</h2>
+            <section>
+                <h3>1 保存支付二维码</h3>
+                <p>
+                    长按二维码，并保存图片。
+                </p>
+            </section>
+            <section>
+                <h3>2 支付宝</h3>
+                <p>
+                    打开支付宝，点击扫一扫，右上角相册选择支付二维码，进行支付。
+                </p>
+            </section>
+        </section>
+    </article>
+</div>

@@ -15,14 +15,13 @@ const pageRoutes: Routes = [
         loadChildren: './home/home.module#HomeModule',
 		data: {preload: true},
     },
-    {
-        path: 'user',
-        loadChildren: './user/user.module#UserModule',
-		data: {preload: true},
-    },
 	{
 		path: 'login',
 		loadChildren: './login/login.module#LoginModule',
+	},
+	{
+		path: 'booking',
+		loadChildren: './booking/booking.module#BookingModule',
 	}
 ]
 

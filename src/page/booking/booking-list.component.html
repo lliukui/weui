@@ -1,0 +1,34 @@
+<div class="weui-form-preview" *ngFor="let booking of bookingList">
+    <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预约详情</label>
+            <em class="weui-form-preview__value">{{booking.statusText}}</em>
+        </div>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">宝宝姓名</label>
+            <span class="weui-form-preview__value">{{booking.childName}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预约服务</label>
+            <span class="weui-form-preview__value">{{booking.services.length > 0 ? booking.services[0].serviceName : ''}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预约医生</label>
+            <span class="weui-form-preview__value">{{booking.services.length > 0 ? booking.services[0].userDoctorName : ''}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预约日期</label>
+            <span class="weui-form-preview__value">{{booking.bookingDate + ' ' + booking.time}}</span>
+        </div>
+        <div *ngIf="booking.status == '1'" class="weui-form-preview__item">
+            <label class="weui-form-preview__label">验证码</label>
+            <span class="weui-form-preview__value">{{booking.authCode}}</span>
+        </div>
+    </div>
+    <div *ngIf="booking.status == '1'" class="weui-form-preview__ft">
+        <button (click)="goPay(booking)" class="weui-form-preview__btn weui-form-preview__btn_primary">去支付</button>
+    </div>
+</div>
+<weui-toast #loading [type]="'loading'"></weui-toast>

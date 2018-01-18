@@ -1,5 +1,9 @@
 import { NgModule }             from '@angular/core';
-import { WeUiModule }           from 'ngx-weui';
+import { CommonModule }         from '@angular/common';
+import { FormsModule }          from '@angular/forms';
+import { WeUiModule }           from '../../weui/index';
+
+import { Ng4yComponentsModule } from '../../ng4y-components/ng4y.module';
 
 import { HomeRoutingModule }    from './home.routing.module';
 
@@ -9,6 +13,9 @@ import { HomeComponent }        from './home.component';
     imports: [
         WeUiModule.forRoot(),
         HomeRoutingModule,
+        CommonModule,
+        FormsModule,
+        Ng4yComponentsModule,
     ],
     declarations: [
         HomeComponent,

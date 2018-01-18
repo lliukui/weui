@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation}     from '@angular/core';
 import { Router }                          from '@angular/router';
-import { ToptipsService }                  from 'ngx-weui/toptips';
-import { ToastService }                    from 'ngx-weui/toast';
+import { ToptipsService }                  from '../../weui/toptips';
+import { ToastService }                    from '../../weui/toast';
 
 import { LoginService }                    from './login.service';
 
@@ -55,9 +55,14 @@ export class LoginComponent{
                 var results = JSON.parse(JSON.stringify(data.results));
                 sessionStorage.setItem('username', results.admininfo.username);
                 sessionStorage.setItem('token', results.admininfo.token);
-                this.router.navigate(['./user']);
+                sessionStorage.setItem('clinicId', results.admininfo.clinicId);
+                this.router.navigate(['./home']);
             }
             this.loading = false;
+        }).catch(() => {
+            this.toast.hide();
+            this.loading = false;
+            this.toptips.warn('服务器错误');
         });
     }
 }

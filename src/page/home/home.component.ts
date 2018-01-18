@@ -1,50 +1,54 @@
-import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
-
-import { SkinType } from 'ngx-weui';
-import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "ngx-weui/actionsheet";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'page-home',
     templateUrl: './home.component.html',
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./home.component.scss']
 })
 
 export class HomeComponent{
+    _status: boolean = false;
+    mode: string = 'slide';
+    position: string = 'left';
+    backdrop: boolean = true;
 
-    @ViewChild('ios') iosAS: ActionSheetComponent;
-    @ViewChild('android') androidAS: ActionSheetComponent;
-    @ViewChild('auto') autoAS: ActionSheetComponent;
+    constructor(
+        private router: Router,
+    ) {}
 
-    menus: any[] = [
-            { text: '菜单一', value: 'test', other: 1 },
-            { text: '菜单三', value: 'test' }
-        ];
-    config: ActionSheetConfig = <ActionSheetConfig>{
-        title: '这是一段标题'
-    };
-
-    constructor(private srv: ActionSheetService) { }
-
-    onShow(type: SkinType) {
-        this.config.skin = type;
-        this.config = Object.assign({}, this.config);
-        setTimeout(() => {
-            (<ActionSheetComponent>this[`${type}AS`]).show().subscribe((res: any) => {
-                console.log('type', res);
-            });
-        }, 10);
+    toggleOpened(): void {
+        this._status = !this._status;
     }
 
-    onShowBySrv(type: SkinType, backdrop: boolean = true) {
-        this.config.skin = type;
-        this.config.backdrop = backdrop;
-        this.srv.show(this.menus, this.config).subscribe((res: any) => {
-            console.log(res);
-        });
+    openStart() {
+        // console.log('openStart');
     }
 
-    ngOnDestroy() {
-        this.srv.destroyAll();
+    opened() {
+        // console.log('opened');
     }
 
+    closeStart() {
+        // console.log('closeStart');
+    }
+
+    closed() {
+        // console.log('closed');
+    }
+
+    goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
+
+    goBookingList() {
+        this.router.navigate(['./booking/info'], {queryParams: {id: '389'}});
+    }
+
+    layout() {
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('clinicId');
+        this.router.navigate(['./login']);
+    }
 }

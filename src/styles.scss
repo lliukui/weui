@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/css/_flex.scss';
+.mt0{margin-top: 0;}
+.mt10{margin-top: 10px;}
+.mag15{margin: 15px;}
+.text-center{text-align: center;}
+
+body{
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    background-color: #f8f8f8;
+}
+
+body, html{
+    height: 100%;
+}
+
+.weui-cells_radio{
+    max-height: 200px;
+    overflow: auto;
+}

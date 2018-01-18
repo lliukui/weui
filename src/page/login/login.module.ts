@@ -1,6 +1,6 @@
 import { NgModule }                   from '@angular/core';
 import { FormsModule }                from '@angular/forms';
-import { WeUiModule }                 from 'ngx-weui';
+import { WeUiModule }                 from '../../weui/index';
 
 import { LoginService }               from './login.service';
 import { LoginRoutingModule }         from './login.routing.module';
