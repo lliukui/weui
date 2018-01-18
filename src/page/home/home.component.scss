@@ -1,6 +1,16 @@
 .sidebar_tab{
-    min-width: 200px;
+    min-width: 100%;
 }
-.weui-grid{
-    width: 50%;
+aside{
+    width: 100%;
+}
+weui-sidebar{
+    width: 100%;
+}
+.weui-sidebar__left{
+    right: 0;
+    width: 100%;
+}
+.weui-sidebar__content{
+    z-index: 9;
 }

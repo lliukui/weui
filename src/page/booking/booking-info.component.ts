@@ -18,20 +18,16 @@ export class BookingInfo implements OnInit{
     url: string;
     bookingId: string;
     bookingInfo: {
-        age: string,
         authCode: string,
         bookingDate: string,
         childId: string,
         childName: string,
-        creatorId: string,
-        creatorName: string,
+        doctorId: string,
+        doctorName: string,
         mobile: string,
-        refereeName: string,
-        remark: string,
-        services: any[],
+        serviceName: string,
         status: string,
         statusText: string,
-        time: string,
     }
     booking: {
         mobile: string,
@@ -72,25 +68,17 @@ export class BookingInfo implements OnInit{
             this.bookingId = params.id;
         });
 
-        this.url = '?username=' + sessionStorage.getItem('username')
-             + '&token=' + sessionStorage.getItem('token')
-             + '&clinic_id=' + sessionStorage.getItem('clinicId');
-
         this.bookingInfo = {
-            age: '',
             authCode: '',
             bookingDate: '',
             childId: '',
             childName: '',
-            creatorId: '',
-            creatorName: '',
+            doctorId: '',
+            doctorName: '',
             mobile: '',
-            refereeName: '',
-            remark: '',
-            services: [],
+            serviceName: '',
             status: '',
             statusText: '',
-            time: '',
         };
         this.booking = {
             mobile: '',
@@ -99,21 +87,20 @@ export class BookingInfo implements OnInit{
         this.showTab = 'info';
 
         (<ToastComponent>this.loadingToast).onShow();
-        var urlOptions = this.url + '&id=' + this.bookingId;
-        this.pageService.searchbooking(urlOptions).then((data) => {
+        this.pageService.bookinginfo(this.bookingId).then((data) => {
+            console.log(1);
             if(data.status == 'no'){
                 (<ToastComponent>this.loadingToast).onHide();
                 this.toptips.warn(data.errorMsg);
             }else{
                 var results = JSON.parse(JSON.stringify(data.results));
-                if(results.weekbooks.length > 0){
-                    this.bookingInfo = results.weekbooks[0];
-                };
+                this.bookingInfo = results.bookinginfo;
                 (<ToastComponent>this.loadingToast).onHide();
             }
         }).catch(() => {
+            console.log(2);
             (<ToastComponent>this.loadingToast).onHide();
-            this.toptips.warn('服务器错误');
+            this.toptips.warn('服务器错误999');
         });
     }
 

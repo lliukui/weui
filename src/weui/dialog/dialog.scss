@@ -1,16 +1,16 @@
-.weui-mask,
-.weui-dialog {
+weui-dialog .weui-mask,
+weui-dialog .weui-dialog {
     opacity: 0;
     visibility: hidden;
 }
 
-.weui-mask__in,
-.weui-dialog__in {
+weui-dialog .weui-mask__in,
+weui-dialog .weui-dialog__in {
     opacity: 1;
     visibility: visible;
 }
 
-.weui-mask {
+weui-dialog .weui-mask {
     transition-duration: .3s;
 }
 

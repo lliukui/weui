@@ -5,11 +5,11 @@ import { Observable }                       from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { Data }                             from '../data';
-import { config }                           from '../config';
+import { appConfig }                           from '../config';
 
 @Injectable()
 export class LoginService {
-	url = config.baseHTTP;
+	url = appConfig.baseHTTP;
 
   	constructor(
 		private http: Http,

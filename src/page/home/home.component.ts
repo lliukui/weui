@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 
 export class HomeComponent{
     _status: boolean = false;
-    mode: string = 'slide';
-    position: string = 'left';
+    mode: string = 'over';
+    position: string = 'cover';
     backdrop: boolean = true;
 
     constructor(
@@ -41,14 +41,10 @@ export class HomeComponent{
         this.router.navigate(['./' + _url]);
     }
 
-    goBookingList() {
-        this.router.navigate(['./booking/info'], {queryParams: {id: '389'}});
-    }
-
     layout() {
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('clinicId');
+        localStorage.removeItem('username');
+        localStorage.removeItem('token');
+        localStorage.removeItem('clinicId');
         this.router.navigate(['./login']);
     }
 }

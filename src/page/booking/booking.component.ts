@@ -9,6 +9,9 @@ import { PickerData, PickerOptions, PickerService } from '../../weui/picker';
 
 import { PageService }        from '../page.service';
 
+
+import { appConfig }                       from '../config';
+
 @Component({
     selector: 'booking',
     templateUrl: './booking.component.html',
@@ -153,9 +156,9 @@ export class BookingComponent{
             authCode: '',
         }
 
-        this.url = '?username=' + sessionStorage.getItem('username')
-             + '&token=' + sessionStorage.getItem('token')
-             + '&clinic_id=' + sessionStorage.getItem('clinicId');
+        this.url = '?username=' + localStorage.getItem('username')
+             + '&token=' + localStorage.getItem('token')
+             + '&clinic_id=' + localStorage.getItem('clinicId');
 
         // 获取宝宝列表
         this.pageService.searchchild(this.url).then((data) => {
@@ -550,9 +553,9 @@ export class BookingComponent{
             return;
         }
         var params = {
-            username: sessionStorage.getItem('username'),
-            token: sessionStorage.getItem('token'),
-            clinic_id: sessionStorage.getItem('clinicId'),
+            username: localStorage.getItem('username'),
+            token: localStorage.getItem('token'),
+            clinic_id: localStorage.getItem('clinicId'),
             type: 'ZJ',
             booking_date: JSON.parse(this.booking.booking_date.value).dutyDate,
             time: this.booking.time.value,
@@ -598,7 +601,8 @@ export class BookingComponent{
         this.config.confirm = '确定';
         setTimeout(() => {
             (<DialogComponent>this.autoAS).show().subscribe((res: any) => {
-                this.router.navigate(['./booking/info'], {queryParams: {id: this.booking.id}});
+                window.location.href = appConfig.http + '/booking/info?id=' + this.booking.id;
+                // this.router.navigate(['./booking/info'], {queryParams: {id: this.booking.id}});
             });
         }, 10);
         return false;

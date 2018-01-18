@@ -1,7 +1,7 @@
 import { Component }         from '@angular/core';
 import { ActivatedRoute }    from '@angular/router';
 
-import { config }            from '../config';
+import { appConfig }            from '../config';
 
 @Component({
     selector: 'booking-payBookingFee',
@@ -29,6 +29,6 @@ export class BookingPayBookingFee{
             this.type = params.type;
         });
 
-        this.payUrl = config.baseHTTP + '/mebcrm/paybooking/' + this.bookingId + '?pay_way=' + this.payType + '&type=' + this.type;
+        this.payUrl = appConfig.baseHTTP + '/mebapi/paybooking/' + this.bookingId + '?pay_way=' + this.payType + '&type=' + this.type;
     }
 }

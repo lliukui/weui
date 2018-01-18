@@ -5,6 +5,8 @@ import { ToptipsService }               from '../../weui/toptips';
 
 import { PageService }                  from '../page.service';
 
+import { appConfig }                       from '../config';
+
 @Component({
     selector: 'page-booking-list',
     templateUrl: './booking-list.component.html',
@@ -23,9 +25,9 @@ export class BookingList{
     ) {}
 
     ngOnInit() {
-        this.url = '?username=' + sessionStorage.getItem('username')
-             + '&token=' + sessionStorage.getItem('token')
-             + '&clinic_id=' + sessionStorage.getItem('clinicId');
+        this.url = '?username=' + localStorage.getItem('username')
+             + '&token=' + localStorage.getItem('token')
+             + '&clinic_id=' + localStorage.getItem('clinicId');
         this.getData();
     }
 
@@ -48,7 +50,8 @@ export class BookingList{
     }
 
     goPay(booking) {
-        this.router.navigate(['./booking/info'], {queryParams: {id: booking.bookingId}});
+        window.location.href = appConfig.http + '/booking/info?id=' + booking.bookingId;
+        // this.router.navigate(['./booking/info'], {queryParams: {id: booking.bookingId}});
     }
 
     goUrl(_url) {

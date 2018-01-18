@@ -53,9 +53,9 @@ export class LoginComponent{
                 this.toptips.warn(data.errorMsg);
             }else{
                 var results = JSON.parse(JSON.stringify(data.results));
-                sessionStorage.setItem('username', results.admininfo.username);
-                sessionStorage.setItem('token', results.admininfo.token);
-                sessionStorage.setItem('clinicId', results.admininfo.clinicId);
+                localStorage.setItem('username', results.admininfo.username);
+                localStorage.setItem('token', results.admininfo.token);
+                localStorage.setItem('clinicId', results.admininfo.clinicId);
                 this.router.navigate(['./home']);
             }
             this.loading = false;

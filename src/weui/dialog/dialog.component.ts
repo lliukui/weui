@@ -41,7 +41,7 @@ import { DialogConfig } from './dialog.config';
                                 <p>{{i.text}}</p>
                             </div>
                             <div class="weui-cell__ft">
-                                <input type="radio" (click)="_promptData=i" [checked]="i==_promptData" (change)="_chanage()" class="weui-check">
+                                <input type="radio" (click)="_onSelectRadio(i)" [checked]="i==_promptData" class="weui-check">
                                 <span class="weui-icon-checked"></span>
                             </div>
                         </label>
@@ -217,6 +217,11 @@ export class DialogComponent implements OnDestroy {
     }
 
     _chanage() {
+        this.promptCheck();
+    }
+
+    _onSelectRadio(i) {
+        this._promptData = i;
         this.promptCheck();
     }
 

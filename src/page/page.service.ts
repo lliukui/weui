@@ -2,11 +2,11 @@ import { Headers, Http, RequestOptions }          from '@angular/http';
 import { Injectable }                             from '@angular/core';
 
 import { Data }                                   from './data';
-import { config }                                 from './config';
+import { appConfig }                                 from './config';
 
 @Injectable()
 export class PageService{
-	url = config.baseHTTP;
+	url = appConfig.baseHTTP;
 
 	constructor(
 		private http: Http,
@@ -71,6 +71,15 @@ export class PageService{
 	private searchbookingUrl = this.url + '/mebcrm/searchbooking';
 	searchbooking(urlOptions): Promise<Data>{
 		return this.http.get(this.searchbookingUrl + urlOptions)
+			.toPromise()
+			.then(response => response.json() as Data)
+			.catch();
+	}
+
+	// 根据鉴权码电话号码查询预约
+	private bookinginfoUrl = this.url + '/mebapi/bookinginfo/';
+	bookinginfo(urlOptions): Promise<Data>{
+		return this.http.get(this.bookinginfoUrl + urlOptions)
 			.toPromise()
 			.then(response => response.json() as Data)
 			.catch();

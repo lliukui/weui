@@ -94,7 +94,7 @@
         </div>
     </div>
     <div class="mag15">
-        <button (click)="bookingSub()" weui-button [weui-loading]="loading" [disabled]="(booking.childType == 'has' && booking.child.text == '') || (booking.childType == 'no' && (booking.user.name == '' || booking.user.mobile == '' || booking.child_info.name == '' || booking.child_info.gender == '' || booking.child_info.birth_date == '')) || booking.service.text == '' || booking.doctor.text == '' || booking.booking_fee == '' || booking.booking_date.text == '' || booking.time.text == '' || loading">预约</button>
+        <button (click)="bookingSub()" weui-button [weui-loading]="loading" [disabled]="(booking.childType == 'has' && booking.child.text == '') || (booking.childType == 'no' && (booking.user.name == '' || booking.user.mobile == '' || booking.child_info.name == '' || booking.child_info.gender.text == '' || booking.child_info.birth_date == '')) || booking.service.text == '' || booking.doctor.text == '' || booking.booking_fee == '' || booking.booking_date.text == '' || booking.time.text == '' || loading">预约</button>
     </div>
 </div>
 <div class="weui-tabbar">
