@@ -26,6 +26,16 @@ input:disabled, input[disabled]{
 .weui-tab{
     height: inherit;
 }
+.type-tab{
+    background-color: #fff;
+    .weui-flex__item{
+        text-align: center;
+        padding: 10px;
+        &.active{
+            background-color: #e2e2e2;
+        }
+    }
+}
 
 .booking-list-page{
 	.flex{
