@@ -42,7 +42,7 @@ export class BookingInfo implements OnInit{
     config: ActionSheetConfig = <ActionSheetConfig>{
         title: '支付类型'
     };
-    payType: string = '';
+    type: string = '';
     @ViewChild('autoDialog') autoDialog: DialogComponent;
     private typeConfig: DialogConfig = <DialogConfig>{
         title: '选择支付方式',
@@ -113,7 +113,7 @@ export class BookingInfo implements OnInit{
         this.config = Object.assign({}, this.config);
         setTimeout(() => {
             (<ActionSheetComponent>this.actionSheet).show().subscribe((res: any) => {
-                this.payType = res.value;
+                this.type = res.value;
                 this.selectType();
             });
         }, 10);
@@ -132,7 +132,7 @@ export class BookingInfo implements OnInit{
         this.config = cog;
         this.autoDialog.show().subscribe((res: any) => {
             if (res.result){
-                this.router.navigate(['./booking/payBookingFee'], {queryParams: {id: this.bookingId, pay_type: this.payType, type: res.result.value}});
+                this.router.navigate(['./booking/payBookingFee'], {queryParams: {id: this.bookingId, pay_type: res.result.value, type: this.type}});
             }
         });
         return false;

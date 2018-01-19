@@ -3,7 +3,7 @@
         <qr-code [value]="payUrl" [size]="200"></qr-code>
     </div>
     <article class="weui-article">
-        <section *ngIf="type == 'wechat'">
+        <section *ngIf="payType == 'wechat'">
             <h2 class="title">微信支付</h2>
             <section>
                 <p>
@@ -11,7 +11,7 @@
                 </p>
             </section>
         </section>
-        <section *ngIf="type == 'ali'">
+        <section *ngIf="payType == 'ali'">
             <h2 class="title">支付宝支付</h2>
             <section>
                 <h3>1 保存支付二维码</h3>

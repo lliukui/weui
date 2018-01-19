@@ -1,16 +1,17 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewEncapsulation, ViewChild }      from '@angular/core';
+import { Router }                                       from '@angular/router';
+import { Observable }                                   from 'rxjs/Observable';
 
-import { SkinType, InputType } from '../../weui/index';
+import { SkinType, InputType }                          from '../../weui/index';
 import { DialogService, DialogConfig, DialogComponent } from '../../weui/dialog';
-import { ToptipsService }                  from '../../weui/toptips';
-import { ToastService }                    from '../../weui/toast';
-import { PickerData, PickerOptions, PickerService } from '../../weui/picker';
+import { ToptipsService }                               from '../../weui/toptips';
+import { ToastService }                                 from '../../weui/toast';
+import { PickerData, PickerOptions, PickerService }     from '../../weui/picker';
 
-import { PageService }        from '../page.service';
+import { PageService }                                  from '../page.service';
 
 
-import { appConfig }                       from '../config';
+import { appConfig }                                    from '../config';
 
 @Component({
     selector: 'booking',
@@ -57,10 +58,12 @@ export class BookingComponent{
         authCode: string,
     }
     loading: boolean = false;
+    searchChildName: string;
+    searchLoading: boolean = false;
+    searchTab: boolean;
     childList: any[];
     genderList: any[];
     serviceList: any[];
-    items: string[] = Array(6).fill('').map((v: string, idx: number) => `Item${idx}`);
     private refereeConfig: DialogConfig = <DialogConfig>{
         title: '选择推荐人',
         inputError: '请选择推荐人',
@@ -138,6 +141,7 @@ export class BookingComponent{
             remark: '',
             authCode: '',
         }
+        this.searchTab = true;
         this.childList = [];
         this.genderList = [
             [
@@ -150,29 +154,6 @@ export class BookingComponent{
         this.url = '?username=' + localStorage.getItem('username')
              + '&token=' + localStorage.getItem('token')
              + '&clinic_id=' + localStorage.getItem('clinicId');
-
-        // 获取宝宝列表
-        this.pageService.searchchild(this.url).then((data) => {
-            if(data.status == 'no'){
-                this.toptips.warn(data.errorMsg);
-            }else{
-                var results = JSON.parse(JSON.stringify(data.results));
-                var child_list = [];
-                for(var item of results.child){
-                    var child = {
-                        label: item.childName,
-                        value: JSON.stringify({
-                            id: item.childId,
-                            name: item.childName,
-                        })
-                    }
-                    child_list.push(child);
-                }
-                this.childList.push(child_list);
-            }
-        }).catch(() => {
-            this.toptips.warn('服务器错误');
-        });
 
         // 获取推荐人列表
         this.pageService.adminlist(this.url).then((data) => {
@@ -220,11 +201,46 @@ export class BookingComponent{
         });
     }
 
+    onSearch(term: string) {
+        this.searchChildName = term;
+        if (term) {
+            this.searchLoading = true;
+            // 获取宝宝列表
+            var urlOptions = this.url + '&name=' + term;
+            this.pageService.searchchild(urlOptions).then((data) => {
+                if(data.status == 'no'){
+                    this.toptips.warn(data.errorMsg);
+                }else{
+                    var results = JSON.parse(JSON.stringify(data.results));
+                    this.searchLoading = false;
+                    this.childList = results.child;
+                }
+            }).catch(() => {
+                this.toptips.warn('服务器错误');
+            });
+        }
+    }
+
+    onCancel() {
+        // console.log('onCancel');
+    }
+
+    onClear() {
+        // console.log('onCancel');
+    }
+
+    onSubmit(value: string) {
+        // console.log('onSubmit', value);
+    }
+
     selectChildType(type) {
         this.booking.childType = type;
         this.booking.child = {
             label: '', value: ''
         };
+        this.searchChildName = '';
+        this.childList = [];
+        this.searchTab = true;
         this.booking.child_info = {
             name: '',
             gender: {
@@ -237,23 +253,31 @@ export class BookingComponent{
         };
     }
 
-    selectChild() {
-        var selectedIndex = 0;
-        for(var i = 0; i < this.childList.length; i++){
-            for(var j = 0; j < this.childList[i].length; j++){
-                if(this.childList[i][j] == this.booking.child){
-                    selectedIndex = j;
-                }
-            }
+    selectChild(child) {
+        this.booking.child = {
+            label: child.childName,
+            value: JSON.stringify({
+                id: child.childId,
+                name: child.childName
+            })
         }
-        this.picker.show(this.childList, null, [selectedIndex], {
-            cancel: '取消',
-            confirm: '确认'
-        }).subscribe((res: any) => {
-            this.booking.child = res.items[0];
-            // 获取家长信息
-            this.getUser();
-        });
+        this.searchTab = false;
+        // 获取家长信息
+        this.getUser();
+    }
+
+    reSearch() {
+        this.searchChildName = '';
+        this.childList = [];
+        this.searchTab = true;
+    }
+
+    getChildName() {
+        if(this.booking.child_info.name != ''){
+            this.booking.user.name = this.booking.child_info.name + '家长';
+        }else{
+            this.booking.user.name = '';
+        }
     }
 
     selectGender() {
@@ -292,6 +316,12 @@ export class BookingComponent{
                         name: results.users[0].name,
                         mobile: results.users[0].mobile,
                     }
+                }else{
+                    this.toptips.warn('该宝宝的家长信息为空，不可预约');
+                    this.booking.child = {
+                        label: '', value: ''
+                    }
+                    this.reSearch();
                 }
             }
         }).catch(() => {
