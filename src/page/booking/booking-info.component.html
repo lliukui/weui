@@ -2,11 +2,10 @@
     <div *ngIf="showTab == ''">
         <div class="weui-cells weui-cells_form mt0">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="" class="weui-label">邀请码</label></div>
+                <div class="weui-cell__hd"><label for="" class="weui-label">鉴权码</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="请输入邀请码"
-                    [(ngModel)]="booking.authCode" name="authCode"
-                    weui-regex="[0-9]*">
+                    <input class="weui-input" type="text" placeholder="请输入鉴权码"
+                    [(ngModel)]="booking.authCode" name="authCode">
                 </div>
             </div>
         </div>

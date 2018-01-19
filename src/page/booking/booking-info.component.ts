@@ -104,7 +104,7 @@ export class BookingInfo implements OnInit{
         if(this.booking.authCode == this.bookingInfo.authCode){
             this.showTab = 'info';
         }else{
-            this.toptips.warn('邀请码不正确');
+            this.toptips.warn('鉴权码不正确');
         }
     }
 

@@ -86,7 +86,7 @@ export class BookingComponent{
         inputOptions: []
     };
     private authCodeConfig: DialogConfig = <DialogConfig>{
-        title: '邀请码',
+        title: '鉴权码',
         content: '',
         confirm: '确定',
     };
