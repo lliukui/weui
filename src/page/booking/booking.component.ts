@@ -41,7 +41,7 @@ export class BookingComponent{
             text: string, value: string
         },
         service: {
-            text: string, value: string
+            label: string, value: string
         },
         doctor: {
             text: string, value: string,
@@ -123,7 +123,7 @@ export class BookingComponent{
                 text: '', value: ''
             },
             service: {
-                text: '', value: ''
+                label: '', value: ''
             },
             doctor: {
                 text: '', value: ''
@@ -542,6 +542,10 @@ export class BookingComponent{
         this.loading = true;
         if(parseFloat(this.booking.booking_fee) < 0){
             this.toptips.warn('预约金不可小于0');
+            return;
+        }
+        if(this.booking.childType == 'no' && this.pageService.checkMobile(this.booking.user.mobile.length)){
+            this.toptips.warn('手机号码不正确');
             return;
         }
         var params = {
