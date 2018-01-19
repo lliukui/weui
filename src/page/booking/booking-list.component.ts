@@ -16,6 +16,7 @@ import { appConfig }                       from '../config';
 export class BookingList{
     url: string;
     bookingList: any[];
+    hasData: boolean;
     @ViewChild('loading') loadingToast: ToastComponent;
 
     constructor(
@@ -25,6 +26,8 @@ export class BookingList{
     ) {}
 
     ngOnInit() {
+        this.bookingList = [];
+        this.hasData = false;
         this.url = '?username=' + localStorage.getItem('username')
              + '&token=' + localStorage.getItem('token')
              + '&clinic_id=' + localStorage.getItem('clinicId');
@@ -32,6 +35,7 @@ export class BookingList{
     }
 
     getData() {
+        (<ToastComponent>this.loadingToast).onShow();
 		var todayDate = this.pageService.getDayByDate(new Date());
         var urlOptions = this.url + '&bdate_big=' + todayDate;
         this.pageService.searchbooking(urlOptions).then((data) => {
@@ -41,6 +45,7 @@ export class BookingList{
             }else{
                 var results = JSON.parse(JSON.stringify(data.results));
                 this.bookingList = results.weekbooks;
+                this.hasData = true;
                 (<ToastComponent>this.loadingToast).onHide();
             }
         }).catch(() => {
