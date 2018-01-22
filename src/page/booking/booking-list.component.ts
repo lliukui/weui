@@ -131,7 +131,7 @@ export class BookingList{
     }
 
     backFee(booking) {
-        this.backFeeConfig.content = (booking.tranInfo.id ? '已支付全额：' : '已支付预约金：') + this.pageService.toDecimal2(booking.tranInfo.id ? booking.tranInfo.amount : booking.yyj.amount);
+        this.backFeeConfig.content = '<div class="text-left">支付方式：' + (booking.tranInfo.id ? booking.tranInfo.wayText : booking.yyj.wayText) + '</div><div class="text-left">' + (booking.tranInfo.id ? '已支付全额：' : '已支付预约金：') + this.pageService.toDecimal2(booking.tranInfo.id ? booking.tranInfo.amount : booking.yyj.amount) + '</div>';
         const cog = Object.assign({}, this.backFeeConfig, <DialogConfig>{
             skin: 'auto',
             type: 'prompt',
