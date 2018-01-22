@@ -97,7 +97,6 @@ export class BookingComponent{
     url: string;
 
     constructor(
-        private srv: DialogService,
         private pageService: PageService,
         private toptips: ToptipsService,
         private toast: ToastService,
@@ -607,7 +606,6 @@ export class BookingComponent{
                 var results = JSON.parse(JSON.stringify(data.results));
                 this.booking.id = results.bookingId;
                 this.booking.authCode = results.authCode;
-                this.loading = false;
                 this.showCode();
             }
         }).catch(() => {

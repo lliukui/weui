@@ -85,6 +85,24 @@ export class PageService{
 			.catch();
 	}
 
+	// 取消预约
+	private bookingcancelledUrl = this.url + '/mebcrm/bookingcancelled/';
+	bookingcancelled(urlOptions): Promise<Data>{
+		return this.http.get(this.bookingcancelledUrl + urlOptions)
+			.toPromise()
+			.then(response => response.json() as Data)
+			.catch();
+	}
+
+	// 退还部分预约金
+	private bookingrefundUrl = this.url + '/mebcrm/bookingrefund/';
+	bookingrefund(urlOptions): Promise<Data>{
+		return this.http.get(this.bookingrefundUrl + urlOptions)
+			.toPromise()
+			.then(response => response.json() as Data)
+			.catch();
+	}
+
 	// 去除左右空格
 	trim(str){
 		if(str == '' || str == undefined || str == null){

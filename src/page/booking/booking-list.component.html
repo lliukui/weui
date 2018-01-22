@@ -29,8 +29,10 @@
                     <span class="weui-form-preview__value">{{booking.authCode}}</span>
                 </div>
             </div>
-            <div *ngIf="booking.status == '1'" class="weui-form-preview__ft">
-                <button (click)="goPay(booking)" class="weui-form-preview__btn weui-form-preview__btn_primary">去支付</button>
+            <div class="weui-form-preview__ft">
+                <button (click)="goPay(booking)" *ngIf="booking.status == '1'" class="weui-form-preview__btn weui-form-preview__btn_primary">支付预约金</button>
+                <button (click)="backFee(booking)" *ngIf="booking.status == '2'" class="weui-form-preview__btn weui-form-preview__btn_warn">{{booking.tranInfo.id ? '退还金额' : '退还预约金'}}</button>
+                <button (click)="cancel(booking)" *ngIf="booking.status == '1' || booking.status == '2'" class="weui-form-preview__btn weui-form-preview__btn_warn">取消预约</button>
             </div>
         </div>
         <div *ngIf="hasData && bookingList.length == 0">
@@ -47,3 +49,4 @@
     </div>
 </div>
 <weui-toast #loading [type]="'loading'"></weui-toast>
+<weui-dialog #auto [config]="config"></weui-dialog>
