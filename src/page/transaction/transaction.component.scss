@@ -1,0 +1,31 @@
+.transaction-statistics-page{
+	.tran-list{
+		padding:10px;
+		&.active{
+			background-color: #dadada;
+		}
+	}
+}
+
+.transaction-statisticsInfo-page{
+	.text-right{
+		text-align:right;
+	}
+	.weui-flex{
+		background-color: #fff;
+		padding:10px;
+		color:#999999;
+		.tran-info{
+			div{
+				padding:5px 15px;
+			}
+		}
+	}
+	.total{
+		border-bottom: 1px solid #e5e5e5;
+		font-size:1.6em;
+		&.info{
+			color:#000;
+		}
+	}
+}

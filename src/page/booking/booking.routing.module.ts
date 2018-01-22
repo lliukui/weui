@@ -7,6 +7,7 @@ import { BookingComponent }            from './booking.component';
 import { BookingInfo }                 from './booking-info.component';
 import { BookingPayBookingFee }        from './booking-payBookingFee.component';
 import { BookingList }                 from './booking-list.component';
+import { BookingListWeek }             from './booking-listWeek.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -27,6 +28,11 @@ import { BookingList }                 from './booking-list.component';
             path: 'list',
             component: BookingList,
         },
+        {
+            path: 'listWeek',
+            component: BookingListWeek,
+        },
+
     ])]
 })
 

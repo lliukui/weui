@@ -1,0 +1,58 @@
+.workbench-reception-page{
+	.flex{
+		overflow:hidden;
+	}
+	padding:10px 0px;
+	.doctor-list{
+		.title{
+			background-color: #f8f8f8;
+			padding:12.5px 10px;
+		}
+		.doctor{
+			width:80px;
+			padding:0 10px;
+			background-color: #f8f8f8;
+			&.active{
+				background-color:#dadada;
+			}
+			.doctor-inner{
+				height: 50px;
+				overflow-y: auto;
+			}
+		}
+	}
+	.swiper-container{
+	}
+	.config-list{
+		.config{
+			height: 50px;
+			&.active{
+			    background-color:#dadada;
+			}
+			.config-inner{
+				height: 50px;
+				overflow-y: auto;
+			}
+		}
+	}
+}
+
+.modal{
+	.right-tab{
+		overflow-x: hidden;
+		overflow-y: auto;
+		max-height: 300px;
+		.list-item{
+			padding: 5px 10px;
+			.item{
+				display: inline-block;
+				background-color: #39A99D;
+				padding: 5px 10px;
+				color: #fff;
+				border-radius: 4px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+			}
+		}
+	}
+}

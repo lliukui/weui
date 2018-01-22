@@ -1,0 +1,43 @@
+<div class="booking-list-page">
+    <div class="ml10">
+		<button (click)="prec()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">上一周</button>
+		<button (click)="now()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">本周</button>
+		<button (click)="next()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">下一周</button>
+	</div>
+    <div class="mt20 ml10">
+        预约信息
+    </div>
+    <div class="color-tab service-tab mr10 ml10">
+		<span>科室颜色：</span>
+		<ng-container *ngFor="let serviceItem of servicelist">
+            <span>{{serviceItem.serviceName}}</span>
+			<span class="icon" [ngClass]="{'color1': serviceItem.color == 'color1', 'color2': serviceItem.color == 'color2', 'color3': serviceItem.color == 'color3', 'color4': serviceItem.color == 'color4', 'color5': serviceItem.color == 'color5', 'color6': serviceItem.color == 'color6', 'color7': serviceItem.color == 'color7', 'color8': serviceItem.color == 'color8', 'color9': serviceItem.color == 'color9', 'color10': serviceItem.color == 'color10'}"></span>
+        </ng-container>
+	</div>
+    <div class="flex">
+        <div class="time-list">
+            <div class="title">
+                时间
+            </div>
+            <div class="time" *ngFor="let time of timelist;let index=index;" [ngClass]="{'active': index % 2 == 1}">
+                {{time.key}}
+            </div>
+        </div>
+        <weui-swiper *ngIf="weeklist.length > 0" [options]="options"  class="flex-1 booking-list color-tab">
+            <div class="swiper-container ">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let week of weeklist;">
+                        <div class="">
+                            <div>{{week.date}}</div>
+                            <div>{{week.title}}</div>
+                            <div class="booking-item" *ngFor="let times of week.timeList;let index = index;"  [ngClass]="{'active': index % 2 == 1}">
+                                <span class="" *ngFor="let serviceItem of times.value" ><span class="num" [ngClass]="{'color1': serviceItem.color == 'color1', 'color2': serviceItem.color == 'color2', 'color3': serviceItem.color == 'color3', 'color4': serviceItem.color == 'color4', 'color5': serviceItem.color == 'color5', 'color6': serviceItem.color == 'color6', 'color7': serviceItem.color == 'color7', 'color8': serviceItem.color == 'color8', 'color9': serviceItem.color == 'color9', 'color10': serviceItem.color == 'color10'}" *ngIf="serviceItem.infoList.length > 0">{{serviceItem.infoList.length}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </weui-swiper>
+    </div>
+</div>

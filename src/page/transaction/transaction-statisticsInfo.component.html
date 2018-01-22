@@ -1,0 +1,72 @@
+<div class="transaction-statisticsInfo-page">
+    <div class="weui-flex" *ngIf="type == 1 || type == 2 || type == 3">
+        <div class="tran-info">
+            <div class="total">总收入</div>
+            <div class="">姓名</div>
+            <div class="" *ngIf="type == 1 || type == 3">应收金额</div>
+            <div class="" *ngIf="type == 2">赠送金额</div>
+            <div class="" *ngIf="type == 1">折扣金额</div>
+            <div class="" *ngIf="type == 1">减免金额</div>
+            <div class="" *ngIf="type == 1">预约金</div>
+            <div class="">实收金额</div>
+            <div class="">现金</div>
+            <div class="">线上支付</div>
+            <div class="">余额支付</div>
+            <div class="" *ngIf="type == 1">挂账</div>
+            <div class="">时间</div>
+            <div class="" *ngIf="type == 1">接诊医生</div>
+            <div class="" *ngIf="type == 1">就诊科室</div>
+            <div class="" *ngIf="type == 1">推荐人</div>
+            <div class="" *ngIf="type == 1">备注</div>
+        </div>
+        <div class="weui-flex__item tran-info text-right">
+            <div class="total info">{{info.total}}</div>
+            <div class="">{{info.childName}}</div>
+            <div class="" *ngIf="type == 1 || type == 3">{{info.needAmount}}</div>
+            <div class="" *ngIf="type == 2">{{info.giveAmount}}</div>
+            <div class="" *ngIf="type == 1">{{info.discount}}</div>
+            <div class="" *ngIf="type == 1">{{info.giveAmount}}</div>
+            <div class="" *ngIf="type == 1">{{info.bookingFee}}</div>
+            <div class="">{{info.paidUp}}</div>
+            <div class="">{{info.cash}}</div>
+            <div class="">{{info.online}}</div>
+            <div class="">{{info.balance}}</div>
+            <div class="" *ngIf="type == 1">{{info.gua + (info.gua == '0.00' ? '' : (info.guastatus == 1 ? '未支付': (info.guastatus == 2 ? '已支付' : '')))}}</div>
+            <div class="">{{info.time}}</div>
+            <div class="" *ngIf="type == 1">{{info.doctorName}}</div>
+            <div class="" *ngIf="type == 1">{{info.serviceName}}</div>
+            <div class="" *ngIf="type == 1">{{info.refereeName}}</div>
+            <div class="" *ngIf="type == 1">{{info.remark}}</div>
+        </div>
+    </div>
+    <div class="weui-flex" *ngIf="type == 4 || type == 5 || type == 6">
+        <div class="tran-info">
+            <div class="total">总收入</div>
+            <div class="">姓名</div>
+            <div class="" *ngIf="type == 4 || type == 6">应收金额</div>
+            <div class="" *ngIf="type == 5">赠送金额</div>
+            <div class="" *ngIf="type == 4">折扣金额</div>
+            <div class="" *ngIf="type == 4">减免金额</div>
+            <div class="" *ngIf="type == 4">预约金</div>
+            <div class="">实收金额</div>
+            <div class="">现金</div>
+            <div class="">线上支付</div>
+            <div class="">余额支付</div>
+            <div class="" *ngIf="type == 4">挂账</div>
+        </div>
+        <div class="weui-flex__item tran-info text-right">
+            <div class="total info">{{total.total}}</div>
+            <div class="">{{info.childName}}</div>
+            <div class="" *ngIf="type == 4 || type == 6">{{total.needAmount}}</div>
+            <div class="" *ngIf="type == 5">{{total.giveAmount}}</div>
+            <div class="" *ngIf="type == 4">{{total.discount}}</div>
+            <div class="" *ngIf="type == 4">{{total.giveAmount}}</div>
+            <div class="" *ngIf="type == 4">{{total.bookingFee}}</div>
+            <div class="">{{total.paidUp}}</div>
+            <div class="">{{total.cash}}</div>
+            <div class="">{{total.online}}</div>
+            <div class="">{{total.balance}}</div>
+            <div class="" *ngIf="type == 4">{{total.gua}}</div>
+        </div>
+    </div>
+</div>
