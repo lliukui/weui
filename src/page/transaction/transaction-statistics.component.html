@@ -1,135 +1,145 @@
-<weui-sidebar-container>
-    <weui-sidebar
-        [(status)]="_status"
-        [mode]="'over'"
-        [position]="'cover'"
-        [backdrop]="backdrop"
-        (openStart)="openStart()"
-        (opened)="opened()"
-        (closeStart)="closeStart()"
-        (closed)="closed()">
-        <div class="sidebar_tab">
-            <div class="weui-cells__title">
-                <div class="weui-flex">
-                    <div class="weui-flex__item">
-                        <button weui-button [weui-mini]="'mini'" closeSidebar [weui-type]="'default'">关闭</button>
+<div class="container-main">
+    <weui-sidebar-container class="main-content">
+        <weui-sidebar
+            [(status)]="_status"
+            [mode]="'over'"
+            [position]="'cover'"
+            [backdrop]="backdrop"
+            (openStart)="openStart()"
+            (opened)="opened()"
+            (closeStart)="closeStart()"
+            (closed)="closed()">
+            <div class="sidebar_tab">
+                <div class="weui-cells__title">
+                    <div class="weui-flex">
+                        <div class="weui-flex__item">
+                            <button weui-button [weui-mini]="'mini'" closeSidebar [weui-type]="'default'">关闭</button>
+                        </div>
+                        <div>
+                            <button weui-button [weui-mini]="'mini'" closeSidebar [weui-type]="'default'" (click)="search('')">搜索</button>
+                        </div>
                     </div>
-                    <div>
-                        <button weui-button [weui-mini]="'mini'" closeSidebar [weui-type]="'default'" (click)="search('')">搜索</button>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">医生：</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="doctor_id"  [(ngModel)]="searchInfo.doctor_id">
+    						       <option value="{{doctor.id}}" *ngFor="let doctor of doctorlist">{{doctor.realName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">用户：</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" name="user_name" [(ngModel)]="searchInfo.user_name" placeholder="请输入用户名">
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">科室：</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="service_id"  [(ngModel)]="searchInfo.service_id">
+                                   <option value="">请选择科室</option>
+    						       <option value="{{service.serviceId}}" *ngFor="let service of servicelist">{{service.serviceName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label for="" class="weui-label">时间：</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" [max]="searchInfo.l_time" name="date" type="date" [(ngModel)]="searchInfo.b_time">
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label for="" class="weui-label" >至：</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" [min]="searchInfo.b_time" name="date" type="date" value="" [(ngModel)]="searchInfo.l_time">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="weui-cells">
-                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                    <div class="weui-cell__hd">
-                        <label for="" class="weui-label">医生：</label>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <select class="weui-select" name="doctor_id"  [(ngModel)]="searchInfo.doctor_id">
-						       <option value="{{doctor.id}}" *ngFor="let doctor of doctorlist">{{doctor.realName}}</option>
-                        </select>
-                    </div>
+        </weui-sidebar>
+        <div class="transaction-statistics-page">
+        <weui-navbar>
+            <weui-tab heading="接诊费用" (select)="changeType('1,3')">
+                <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
+                <div class="weui-cells mt0" *ngIf="tranList.length > 0">
+                    <ng-container *ngFor="let tran of tranList; let index=index;">
+                        <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '1')">
+                            <div class="weui-cell__bd">
+                                <p>{{tran.childName ? tran.childName : tran.userName}}</p>
+                            </div>
+                            <div class="weui-cell__ft">{{tran.total}}</div>
+                        </a>
+                    </ng-container>
+                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '4')">
+                        <div class="weui-cell__bd">
+                            <p>总计</p>
+                        </div>
+                        <div class="weui-cell__ft">{{total.total}}</div>
+                    </a>
                 </div>
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label class="weui-label">用户：</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" name="user_name" [(ngModel)]="searchInfo.user_name" placeholder="请输入用户名">
-                    </div>
+                <div *ngIf="hasData && tranList.length == 0">
+                    <weui-loadmore type="line" lineText="暂无接诊费用记录"></weui-loadmore>
+    		    </div>
+            </weui-tab>
+            <weui-tab heading="会员充值" (select)="changeType('2')">
+                <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
+                <div class="weui-cells mt0" *ngIf="tranList.length > 0">
+                    <ng-container *ngFor="let tran of tranList; let index=index;">
+                        <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '2')">
+                            <div class="weui-cell__bd">
+                                <p>{{tran.childName ? tran.childName : tran.userName}}</p>
+                            </div>
+                            <div class="weui-cell__ft">{{tran.total}}</div>
+                        </a>
+                    </ng-container>
+                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '5')">
+                        <div class="weui-cell__bd">
+                            <p>总计</p>
+                        </div>
+                        <div class="weui-cell__ft">{{total.total}}</div>
+                    </a>
                 </div>
-                <div class="weui-cell weui-cell_select weui-cell_select-after">
-                    <div class="weui-cell__hd">
-                        <label for="" class="weui-label">科室：</label>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <select class="weui-select" name="service_id"  [(ngModel)]="searchInfo.service_id">
-                               <option value="">请选择科室</option>
-						       <option value="{{service.serviceId}}" *ngFor="let service of servicelist">{{service.serviceName}}</option>
-                        </select>
-                    </div>
+                <div *ngIf="hasData && tranList.length == 0">
+                    <weui-loadmore type="line" lineText="暂无会员充值记录"></weui-loadmore>
+    		    </div>
+            </weui-tab>
+            <weui-tab heading="药品零售" (select)="changeType('4')">
+                <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
+                <div class="weui-cells mt0" *ngIf="tranList.length > 0">
+                    <ng-container *ngFor="let tran of tranList; let index=index;">
+                        <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '3')">
+                            <div class="weui-cell__bd">
+                                <p>{{tran.childName ? tran.childName : tran.userName}}</p>
+                            </div>
+                            <div class="weui-cell__ft">{{tran.total}}</div>
+                        </a>
+                    </ng-container>
+                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '6')">
+                        <div class="weui-cell__bd">
+                            <p>总计</p>
+                        </div>
+                        <div class="weui-cell__ft">{{total.total}}</div>
+                    </a>
                 </div>
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="" class="weui-label">时间：</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" [max]="searchInfo.l_time" name="date" type="date" [(ngModel)]="searchInfo.b_time">
-                    </div>
+                <div *ngIf="hasData && tranList.length == 0">
+                    <weui-loadmore type="line" lineText="暂无药品零售记录"></weui-loadmore>
+    		    </div>
+            </weui-tab>
+        </weui-navbar>
+    </div>
+        <div class="weui-tabbar">
+            <div class="weui-tabbar__item weui-bar__item_on" (click)="goUrl('home')">
+                <div style="display: inline-block; position: relative;">
+                    <div class="weui-tabbar__icon"><img src="./assets/images/icon_home.png"></div>
                 </div>
-                <div class="weui-cell">
-                    <div class="weui-cell__hd"><label for="" class="weui-label" >至：</label></div>
-                    <div class="weui-cell__bd">
-                        <input class="weui-input" [min]="searchInfo.b_time" name="date" type="date" value="" [(ngModel)]="searchInfo.l_time">
-                    </div>
-                </div>
+                <p class="weui-tabbar__label">首页</p>
             </div>
         </div>
-    </weui-sidebar>
-<div class="transaction-statistics-page">
-    <weui-navbar>
-        <weui-tab heading="接诊费用" (select)="changeType('1,3')">
-            <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
-            <div class="weui-cells mt0" *ngIf="tranList.length > 0">
-                <ng-container *ngFor="let tran of tranList; let index=index;">
-                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '1')">
-                        <div class="weui-cell__bd">
-                            <p>{{tran.childName ? tran.childName : tran.userName}}</p>
-                        </div>
-                        <div class="weui-cell__ft">{{tran.total}}</div>
-                    </a>
-                </ng-container>
-                <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '4')">
-                    <div class="weui-cell__bd">
-                        <p>总计</p>
-                    </div>
-                    <div class="weui-cell__ft">{{total.total}}</div>
-                </a>
-            </div>
-            <div *ngIf="hasData && tranList.length == 0">
-                <weui-loadmore type="line" lineText="暂无接诊费用记录"></weui-loadmore>
-		    </div>
-        </weui-tab>
-        <weui-tab heading="会员充值" (select)="changeType('2')">
-            <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
-            <div class="weui-cells mt0" *ngIf="tranList.length > 0">
-                <ng-container *ngFor="let tran of tranList; let index=index;">
-                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '2')">
-                        <div class="weui-cell__bd">
-                            <p>{{tran.childName ? tran.childName : tran.userName}}</p>
-                        </div>
-                        <div class="weui-cell__ft">{{tran.total}}</div>
-                    </a>
-                </ng-container>
-                <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '5')">
-                    <div class="weui-cell__bd">
-                        <p>总计</p>
-                    </div>
-                    <div class="weui-cell__ft">{{total.total}}</div>
-                </a>
-            </div>
-            <div *ngIf="hasData && tranList.length == 0">
-                <weui-loadmore type="line" lineText="暂无会员充值记录"></weui-loadmore>
-		    </div>
-        </weui-tab>
-        <weui-tab heading="药品零售" (select)="changeType('4')">
-            <weui-button class="ml10 mt10" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" (click)="toggleOpened()">搜索</weui-button>
-            <div class="weui-cells mt0" *ngIf="tranList.length > 0">
-                <ng-container *ngFor="let tran of tranList; let index=index;">
-                    <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkInfo(tran, '3')">
-                        <div class="weui-cell__bd">
-                            <p>{{tran.childName ? tran.childName : tran.userName}}</p>
-                        </div>
-                        <div class="weui-cell__ft">{{tran.total}}</div>
-                    </a>
-                </ng-container>
-                <a class="weui-cell weui-cell_access" href="javascript:;" (click)="checkTotalInfo(total, '6')">
-                    <div class="weui-cell__bd">
-                        <p>总计</p>
-                    </div>
-                    <div class="weui-cell__ft">{{total.total}}</div>
-                </a>
-            </div>
-            <div *ngIf="hasData && tranList.length == 0">
-                <weui-loadmore type="line" lineText="暂无药品零售记录"></weui-loadmore>
-		    </div>
-        </weui-tab>
-    </weui-navbar>
+    </weui-sidebar-container>
 </div>
-</weui-sidebar-container>

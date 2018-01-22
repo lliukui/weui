@@ -324,4 +324,8 @@ export class BookingListWeek implements OnInit{
 		urlOptions += '&clinic_id=' + 1;
 		return urlOptions;
 	}
+
+	goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
 }

@@ -1,40 +1,50 @@
-<div class="workbench-reception-page">
-    <div class="ml10">
-		<button (click)="prec()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">上一周</button>
-		<button (click)="now()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">本周</button>
-		<button (click)="next()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">下一周</button>
-	</div>
-    <div class="mt20 ml10">
-        排班信息
-    </div>
-    <div class="flex">
-        <div class="doctor-list">
-            <div class="title">
-                姓名
-            </div>
-            <div class="doctor" *ngFor="let doctor of doctorList;let index=index;" [ngClass]="{'active': index % 2 == 1}">
-                <div class="doctor-inner">
-                    {{doctor.realName}}
-                </div>
-            </div>
+<div class="container-main">
+    <div class="workbench-reception-page main-content">
+        <div class="ml10">
+    		<button (click)="prec()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">上一周</button>
+    		<button (click)="now()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">本周</button>
+    		<button (click)="next()" weui-button [weui-plain]="true" [weui-type]="'default'" [weui-mini]="true" class="">下一周</button>
+    	</div>
+        <div class="mt20 ml10">
+            排班信息
         </div>
-        <weui-swiper *ngIf="schedulinglist.length > 0" [options]="options"  class="config-list flex-1">
-            <div class="swiper-container ">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" *ngFor="let scheduling of schedulinglist;">
-                        <div>{{scheduling.dateFormat}}</div>
-    				    <div>{{scheduling.title}}</div>
-                        <div class="config" *ngFor="let day of scheduling.weekScheduling;let index=index;" [ngClass]="{'active': index % 2 == 1}">
-                            <div class="config-inner" >
-                                <div *ngFor="let config of day.dutyConfigList;" >
-            						{{config}}
-            					</div>
-                            </div>
-    				    </div>
+        <div class="flex">
+            <div class="doctor-list">
+                <div class="title">
+                    姓名
+                </div>
+                <div class="doctor" *ngFor="let doctor of doctorList;let index=index;" [ngClass]="{'active': index % 2 == 1}">
+                    <div class="doctor-inner">
+                        {{doctor.realName}}
                     </div>
                 </div>
-                <div class="swiper-pagination"></div>
             </div>
-        </weui-swiper>
+            <weui-swiper *ngIf="schedulinglist.length > 0" [options]="options"  class="config-list flex-1">
+                <div class="swiper-container ">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" *ngFor="let scheduling of schedulinglist;">
+                            <div>{{scheduling.dateFormat}}</div>
+        				    <div>{{scheduling.title}}</div>
+                            <div class="config" *ngFor="let day of scheduling.weekScheduling;let index=index;" [ngClass]="{'active': index % 2 == 1}">
+                                <div class="config-inner" >
+                                    <div *ngFor="let config of day.dutyConfigList;" >
+                						{{config}}
+                					</div>
+                                </div>
+        				    </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </weui-swiper>
+        </div>
+    </div>
+    <div class="weui-tabbar">
+        <div class="weui-tabbar__item weui-bar__item_on" (click)="goUrl('home')">
+            <div style="display: inline-block; position: relative;">
+                <div class="weui-tabbar__icon"><img src="./assets/images/icon_home.png"></div>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </div>
     </div>
 </div>

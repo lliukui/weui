@@ -94,6 +94,10 @@ export class TransactionStatisticsInfoComponent{
 		this.getData();
 	}
 
+	goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
+
 	getData() {
 		var info =  JSON.parse(sessionStorage.getItem('statisticsInfo'));
 		var total = JSON.parse(sessionStorage.getItem('statisticsTotal'));

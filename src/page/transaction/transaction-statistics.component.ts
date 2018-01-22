@@ -308,4 +308,8 @@ export class TransactionStatisticsComponent{
 		sessionStorage.setItem('statisticsType', type);
 		this.router.navigate(['./transaction/statisticsInfo']);
 	}
+
+	goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
 }

@@ -185,6 +185,9 @@ export class WorkbenchReceptionComponent{
 		});
 	}
 
+	goUrl(_url) {
+        this.router.navigate(['./' + _url]);
+    }
 	// getBookingList(urlOptions) {
 	// 	this.workbenchService.doctorbooking(urlOptions).then((data) => {
 	// 		if(data.status == 'no'){
