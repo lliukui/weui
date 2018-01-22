@@ -35,6 +35,27 @@
                         <div class="weui-cell__ft">
                         </div>
                     </a>
+                    <a (click)="goUrl('booking/listWeek')" class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__bd">
+                            <p>预约日历列表</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                        </div>
+                    </a>
+                    <a (click)="goUrl('workbench/reception')" class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__bd">
+                            <p>排班列表</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                        </div>
+                    </a>
+                    <a (click)="goUrl('transaction/statistics')" class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__bd">
+                            <p>交易统计</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                        </div>
+                    </a>
                     <a (click)="layout()" class="weui-cell weui-cell_access" href="javascript:;">
                         <div class="weui-cell__bd">
                             <p>退出</p>
@@ -64,6 +85,24 @@
                         <img src="./assets/images/icon_sidebar.png" alt="">
                     </div>
                     <p class="weui-grid__label">侧边目录</p>
+                </a>
+                <a (click)="goUrl('booking/listWeek')" class="weui-grid" href="javascript:;">
+                    <div class="weui-grid__icon">
+                        <img src="./assets/images/icon_listWeek.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">预约日历列表</p>
+                </a>
+                <a (click)="goUrl('workbench/reception')" class="weui-grid" href="javascript:;">
+                    <div class="weui-grid__icon">
+                        <img src="./assets/images/icon_workbench.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">排班列表</p>
+                </a>
+                <a (click)="goUrl('transaction/statistics')" class="weui-grid" href="javascript:;">
+                    <div class="weui-grid__icon">
+                        <img src="./assets/images/icon_statistics.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">交易统计</p>
                 </a>
             </div>
         </div>
