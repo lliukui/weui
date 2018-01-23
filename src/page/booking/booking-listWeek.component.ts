@@ -9,7 +9,7 @@ import { PageService }                 from '../page.service';
 @Component({
 	selector: 'app-booking-listWeek',
 	templateUrl: './booking-listWeek.component.html',
-	styleUrls: ['./booking.component.scss'],
+	styleUrls: ['./booking-listWeek.component.scss'],
 })
 export class BookingListWeek implements OnInit{
 	   loadingShow: boolean;
