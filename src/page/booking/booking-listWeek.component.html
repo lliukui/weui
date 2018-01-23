@@ -26,7 +26,7 @@
                     {{time.key}}
                 </div>
             </div>
-            <weui-swiper *ngIf="weeklist.length > 0" [options]="options" #swiperDom class="flex-1 booking-list color-tab">
+            <weui-swiper *ngIf="weeklist.length > 0" [options]="swiperDom" #swiper class="flex-1 booking-list color-tab">
                 <div class="swiper-container ">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" *ngFor="let week of weeklist;">

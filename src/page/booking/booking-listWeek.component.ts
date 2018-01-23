@@ -1,10 +1,11 @@
-import { Component, OnInit }           from '@angular/core';
-import { Router, ActivatedRoute }      from '@angular/router';
-import { ToptipsService }              from '../../weui/toptips';
-import { ToastService }                from '../../weui/toast';
+import { Component, OnInit, ViewChild }     from '@angular/core';
+import { Router, ActivatedRoute }           from '@angular/router';
+import { ToptipsService }                   from '../../weui/toptips';
+import { ToastService }                     from '../../weui/toast';
+import { SwiperComponent }                  from '../../weui/swiper';
 
-import { BookingService }              from './booking.service';
-import { PageService }                 from '../page.service';
+import { BookingService }                   from './booking.service';
+import { PageService }                      from '../page.service';
 
 @Component({
 	selector: 'app-booking-listWeek',
@@ -12,15 +13,27 @@ import { PageService }                 from '../page.service';
 	styleUrls: ['./booking-listWeek.component.scss'],
 })
 export class BookingListWeek implements OnInit{
-	   loadingShow: boolean;
-	   url: string;
-	   servicelist: any[];
-	   bookinglist: any[];
-	   weeklist: any[];
-	   weektitle: any[];
-	   timelist: any[];
-	   weekNum: number;
-	   hasData: boolean;
+	loadingShow: boolean;
+	url: string;
+	servicelist: any[];
+	bookinglist: any[];
+	weeklist: any[];
+	weektitle: any[];
+	timelist: any[];
+	weekNum: number;
+	hasData: boolean;
+	@ViewChild('swiper') swiperDDD: any;
+	swiperDom: any = {
+		loop: false,
+		on:{
+	    	slideChange: (swiper: any) => {
+				console.log(this.swiperDDD);
+				if(this.swiperDDD && this.swiperDDD.swiper){
+					console.log(this.swiperDDD.swiper.activeIndex);
+				}
+	    	},
+	  	},
+    };
 
 	constructor(
 		private bookingService: BookingService,
