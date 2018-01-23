@@ -22,14 +22,24 @@ export class BookingListWeek implements OnInit{
 	timelist: any[];
 	weekNum: number;
 	hasData: boolean;
+	@ViewChild('swiperTitle') swiperTitle: any;
 	@ViewChild('swiper') swiperDDD: any;
 	swiperDom: any = {
 		loop: false,
 		on:{
 	    	slideChange: (swiper: any) => {
-				console.log(this.swiperDDD);
+				if(this.swiperTitle && this.swiperTitle.swiper){
+					this.swiperTitle.swiper.slideTo(this.swiperDDD.swiper.activeIndex,100,false);
+				}
+	    	},
+	  	},
+    };
+	swiperTitleDom: any = {
+		loop: false,
+		on:{
+	    	slideChange: (swiper: any) => {
 				if(this.swiperDDD && this.swiperDDD.swiper){
-					console.log(this.swiperDDD.swiper.activeIndex);
+					this.swiperDDD.swiper.slideTo(this.swiperTitle.swiper.activeIndex,100,false);
 				}
 	    	},
 	  	},

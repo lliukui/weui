@@ -1,6 +1,17 @@
+.pt50{
+    padding-top:50px;
+}
+
 .container-main{
     display: flex;
     flex-direction: column;
+    .time-list{
+        .title{
+            background-color: #fff;
+			padding:12.5px 10px;
+            width: 80px;
+        }
+    }
 }
 .booking-list-page{
     flex: 1;
@@ -11,12 +22,12 @@
 	}
 	.time-list{
 		.title{
-			background-color: #f8f8f8;
+			background-color: #fff;
 			padding:12.5px 10px;
 		}
 		.time{
 			padding:0 10px;
-			background-color: #f8f8f8;
+			background-color: #fff;
 			height: 25px;
 			overflow-x: hidden;
 			width: 80px;
@@ -28,6 +39,9 @@
 	.swiper-container{
 	}
 	.booking-list{
+        .booking-title{
+            position:absolute;
+        }
 		.booking-item{
 			overflow-y: auto;
 			height:25px;
@@ -45,50 +59,53 @@
             }
         }
 	}
-	.service-tab{
-        padding: 10px 0;
-        span{
-            padding-left: 20px;
-            margin-bottom: 10px;
-            &:first-child{
-                padding-left: 0;
-            }
-            &.icon{
-                color: #fff;
-                width: 10px;
-            }
+
+}
+
+.service-tab{
+    padding: 10px 0;
+    span{
+        padding-left: 20px;
+        margin-bottom: 10px;
+        &:first-child{
+            padding-left: 0;
+        }
+        &.icon{
+            color: #fff;
+            width: 10px;
         }
     }
-	.color-tab{
-	    .color1{
-	        background-color: #c080ff!important;
-	    }
-	    .color2{
-	        background-color: #003499!important;
-	    }
-	    .color3{
-	        background-color: #CC0232!important;
-	    }
-	    .color4{
-	        background-color: #000000!important;
-	    }
-	    .color5{
-	        background-color: #00dc6b!important;
-	    }
-	    .color6{
-	        background-color: #ff7300!important;
-	    }
-	    .color7{
-	        background-color: #653567!important;
-	    }
-	    .color8{
-	        background-color: #98CE32!important;
-	    }
-	    .color9{
-	        background-color: #666698!important;
-	    }
-	    .color10{
-	        background-color: #FF9997!important;
-	    }
-	}
+}
+
+.color-tab{
+    .color1{
+        background-color: #c080ff!important;
+    }
+    .color2{
+        background-color: #003499!important;
+    }
+    .color3{
+        background-color: #CC0232!important;
+    }
+    .color4{
+        background-color: #000000!important;
+    }
+    .color5{
+        background-color: #00dc6b!important;
+    }
+    .color6{
+        background-color: #ff7300!important;
+    }
+    .color7{
+        background-color: #653567!important;
+    }
+    .color8{
+        background-color: #98CE32!important;
+    }
+    .color9{
+        background-color: #666698!important;
+    }
+    .color10{
+        background-color: #FF9997!important;
+    }
 }

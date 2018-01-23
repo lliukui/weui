@@ -1,23 +1,39 @@
+.container-main{
+	display: flex;
+    flex-direction: column;
+	.doctor-list{
+        .title{
+            background-color: #fff;
+			padding:12.5px 10px;
+            width: 80px;
+        }
+    }
+}
 .workbench-reception-page{
+	flex: 1;
+    overflow: auto;
+	padding-bottom: 53px;
 	.flex{
 		overflow:hidden;
 	}
 	padding:10px 0px;
 	.doctor-list{
 		.title{
-			background-color: #f8f8f8;
+			background-color: #fff;
 			padding:12.5px 10px;
 		}
 		.doctor{
-			width:80px;
-			padding:0 10px;
-			background-color: #f8f8f8;
-			&.active{
-				background-color:#dadada;
-			}
-			.doctor-inner{
-				height: 50px;
-				overflow-y: auto;
+			.doctor-item{
+				width:80px;
+				padding:0 10px;
+				background-color: #fff;
+				&.active{
+					background-color:#dadada;
+				}
+				.doctor-inner{
+					height: 50px;
+					overflow-y: auto;
+				}
 			}
 		}
 	}
@@ -25,13 +41,15 @@
 	}
 	.config-list{
 		.config{
-			height: 50px;
-			&.active{
-			    background-color:#dadada;
-			}
-			.config-inner{
+			.config-item{
 				height: 50px;
-				overflow-y: auto;
+				&.active{
+				    background-color:#dadada;
+				}
+				.config-inner{
+					height: 50px;
+					overflow-y: auto;
+				}
 			}
 		}
 	}

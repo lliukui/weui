@@ -1,4 +1,4 @@
-import { Component, OnInit }           from '@angular/core';
+import { Component, OnInit, ViewChild}           from '@angular/core';
 import { Router, ActivatedRoute }      from '@angular/router';
 import { ToptipsService }              from '../../weui/toptips';
 import { ToastService }                from '../../weui/toast';
@@ -44,6 +44,28 @@ export class WorkbenchReceptionComponent{
 		text: string,
 	}
 	hasDutyData: boolean;
+	@ViewChild('swiperTitle') swiperTitle: any;
+	@ViewChild('swiper') swiperDDD: any;
+	swiperDom: any = {
+		loop: false,
+		on:{
+	    	slideChange: (swiper: any) => {
+				if(this.swiperTitle && this.swiperTitle.swiper){
+					this.swiperTitle.swiper.slideTo(this.swiperDDD.swiper.activeIndex,100,false);
+				}
+	    	},
+	  	},
+    };
+	swiperTitleDom: any = {
+		loop: false,
+		on:{
+	    	slideChange: (swiper: any) => {
+				if(this.swiperDDD && this.swiperDDD.swiper){
+					this.swiperDDD.swiper.slideTo(this.swiperTitle.swiper.activeIndex,100,false);
+				}
+	    	},
+	  	},
+    };
 
 	constructor(
 		private workbenchService: WorkbenchService,
